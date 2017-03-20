@@ -7,7 +7,7 @@ require_once('TwitterAPIExchange.php');
 $address = $_GET['message'];
 // $address = "118c Pratap Nagar, Udaipur 313001 Rajasthan"; // Google HQ
 $prepAddr = str_replace('-','+',str_replace('/',' ',str_replace(' ','+',$address)));
-$xml=simplexml_load_file("http://where.yahooapis.com/v1/places.q('".$prepAddr."')?appid=dj0yJmk9YUdlbjAyM2YwQlJaJmQ9WVdrOU9HaE5PR0pRTnpJbWNHbzlNQS0tJnM9Y29uc3VtZXJzZWNyZXQmeD1mOQ--") or die("Error: Cannot create object");
+$xml=simplexml_load_file("http://where.yahooapis.com/v1/places.q('".$prepAddr."')?appid=<your-app-id>") or die("Error: Cannot create object");
 
 echo "<br/>geodata ".$xml->place->woeid." ".$xml->place->centroid->latitude." ".$xml->place->centroid->longitude."<br/>";
 $woeid = $xml->place->woeid;
@@ -19,10 +19,10 @@ $requestMethod = "GET";
 $getfield = 'id='.$woeid;
 
 $settings = array(
-    'oauth_access_token' => "4624853774-SsFb0L1UDk0hsJUjDrmTmhrXcE6w7kdvjYHAhbf",
-    'oauth_access_token_secret' => "tRv9NZuo3qEl029VhETfTaZYNuBHhXyQwbxd6fTa4PvXq",
-    'consumer_key' => "scE83mbvbDxdxTaYKezg4hGxB",
-    'consumer_secret' => "s7VHop8D7GepCcejhHBlfu9l8oQ3ySBizHvyMp2SWzoWjJboaY"
+    'oauth_access_token' => "<twitter-oauth_access_token>",
+    'oauth_access_token_secret' => "<twitter-oauth_access_token_secret>",
+    'consumer_key' => "<twitter-consumer-key>",
+    'consumer_secret' => "<twitter-consumer-secret>"
 );
 $twitter = new TwitterAPIExchange($settings);
 $string = json_decode($twitter->setGetfield($getfield)
@@ -145,7 +145,7 @@ if (count($trends)==0)
 echo $message."<br/>";
 echo "phone no = ".$_GET['cid']."<br/>";
 $url = 'http://www.kookoo.in/outbound/outbound_sms.php';
-$param = array('api_key' => 'KK3b25301296e09ac47980cc5b8732f4d7', 
+$param = array('api_key' => '<KooKoo api key>', 
 'phone_no' => $_GET['cid'], 
 'message' => $message
 );
